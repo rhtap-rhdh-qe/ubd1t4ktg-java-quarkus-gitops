@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:         
+  rhtap/gitops: ubd1t4ktg-java-quarkus 
+  janus-idp.io/tekton: ubd1t4ktg-java-quarkus
+  backstage.io/kubernetes-id: ubd1t4ktg-java-quarkus
+  backstage.io/kubernetes-namespace: rhtap-app 
+  app.kubernetes.io/part-of: ubd1t4ktg-java-quarkus
+resources: 
+- application-dev.yaml 
+- application-stage.yaml 
+- application-prod.yaml  

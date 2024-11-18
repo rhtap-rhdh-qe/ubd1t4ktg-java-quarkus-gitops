@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ubd1t4ktg-java-quarkus-development
+  namespace: rhtap
+  finalizers: ["resources-finalizer.argocd.argoproj.io"] 
+spec:
+  project: default
+  source:
+    path: ./components/ubd1t4ktg-java-quarkus/overlays/development
+    repoURL: https://github.com/rhtap-rhdh-qe/ubd1t4ktg-java-quarkus-gitops.git
+    targetRevision: main
+  destination:
+    namespace: rhtap-app-development
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels: 
+        argocd.argoproj.io/managed-by: rhtap
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
